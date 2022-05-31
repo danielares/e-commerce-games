@@ -1,0 +1,28 @@
+.games {
+    transition: background-color 0.5s ease;
+    background-color: rgb(29, 30, 30);
+    border-radius: 25px;
+    padding: 15px;
+    overflow: hidden;
+    padding-top: 15px;
+    color: white;
+}
+
+.games:hover {
+    transition: background-color 0.5s ease;
+    background-color: rgb(24, 25, 25);
+}
+
+/* IMAGENS */
+.games img {
+    max-width: 100%;
+    -moz-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.games:hover img {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}

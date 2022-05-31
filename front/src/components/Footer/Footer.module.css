@@ -1,0 +1,12 @@
+footer .copyright {
+    background-color: rgba(45, 46, 47);
+}
+
+footer .copyright a {
+    text-decoration: none
+}
+
+footer i {
+    color: rgb(192, 215, 215);
+    transition: .3s;
+}
