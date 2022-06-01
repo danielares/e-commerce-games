@@ -48,7 +48,12 @@ const Login = () => {
         <div className='container min-vh-100'>
             <div className="row">
                 {loading === false && <h1 className='fw-bold'>Informe seus dados de acesso</h1>}
-                {errors === true && <h2>Cannot log in with provided credentials</h2>}
+                {errors === true &&
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        Não foi possivel logar com os dados fornecidos.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
                 {loading === false && (
                     <form onSubmit={onSubmit}>
                         <div className="offset-md-3 col-12 col-md-6 mt-5">
@@ -84,7 +89,7 @@ const Login = () => {
                     </form>
                 )}
             </div>
-        </div>
+        </div >
     );
 };
 

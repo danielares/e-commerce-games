@@ -3,7 +3,7 @@ import styles from './Footer.module.css';
 const Footer = () => {
     return (
         <div>
-            <footer className="bg-dark text-center text-white">
+            <footer className="bg-dark text-center text-white mt-5">
 
                 <div className="container p-4 pb-2">
 
