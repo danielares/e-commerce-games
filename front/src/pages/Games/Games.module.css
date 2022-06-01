@@ -1,11 +1,12 @@
 .games {
     transition: background-color 0.5s ease;
-    background-color: rgb(29, 30, 30);
-    border-radius: 25px;
+    background-color: #212529;
+    border-radius: 5px;
     padding: 15px;
     overflow: hidden;
     padding-top: 15px;
     color: white;
+    height: 350px;
 }
 
 .games:hover {
@@ -25,4 +26,14 @@
     -moz-transform: scale(1.1);
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
+}
+
+/* Icons */
+.games button {
+    width: 100%;
+    color: #FFF;
+}
+
+.games i {
+    padding-right: 5px;
 }

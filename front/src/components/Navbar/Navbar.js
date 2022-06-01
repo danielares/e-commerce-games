@@ -33,10 +33,16 @@ const Navbar = () => {
                                 </NavLink>
                             </li>
 
-                            
+
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/">
-                                    Sell
+                                    Login
+                                </NavLink>
+                            </li>
+
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/">
+                                    Cadastrar
                                 </NavLink>
                             </li>
 
@@ -45,8 +51,10 @@ const Navbar = () => {
                                     Api
                                 </a>
                             </li>
-
                         </ul>
+                        <span className="navbar-text">
+                            Olá, Nome_da_pessoa
+                        </span>
                     </div>
                 </div>
             </nav>
