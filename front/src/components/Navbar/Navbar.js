@@ -1,7 +1,15 @@
-import React from 'react'
+import { useState, useEffect, Fragment } from 'react'
 import { NavLink } from "react-router-dom"
 
 const Navbar = () => {
+    const [isAuth, setIsAuth] = useState(false);
+
+    useEffect(() => {
+        if (localStorage.getItem('token') !== null) {
+            setIsAuth(true);
+        }
+    }, []);
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -33,18 +41,29 @@ const Navbar = () => {
                                 </NavLink>
                             </li>
 
+                            {isAuth === true ? (
+                                <Fragment>
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link" to="/logout">
+                                            Logout
+                                        </NavLink>
+                                    </li>
+                                </Fragment>
+                            ) : (
+                                <Fragment>
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link" to="/login">
+                                            Login
+                                        </NavLink>
+                                    </li>
 
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/">
-                                    Login
-                                </NavLink>
-                            </li>
-
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/">
-                                    Cadastrar
-                                </NavLink>
-                            </li>
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link" to="/signup">
+                                            Cadastrar
+                                        </NavLink>
+                                    </li>
+                                </Fragment>
+                            )}
 
                             <li className="nav-item">
                                 <a className="nav-link" href='/api/games'>

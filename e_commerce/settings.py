@@ -146,6 +146,10 @@ STATICFILES_DIRS = [
 ]
 
 # DRF
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8000',
+]
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTHENTICATION_BACKENDS = (
@@ -161,7 +165,7 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',

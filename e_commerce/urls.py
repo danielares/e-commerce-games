@@ -14,6 +14,9 @@ urlpatterns = [
     
     
     path('games/', TemplateView.as_view(template_name='index.html')),
+    path('login/', TemplateView.as_view(template_name='index.html')),
+    path('logout/', TemplateView.as_view(template_name='index.html')),
+    path('signup/', TemplateView.as_view(template_name='index.html')),
 ]
 
 if settings.DEBUG:
