@@ -3,12 +3,23 @@ import { NavLink } from "react-router-dom"
 
 const Navbar = () => {
     const [isAuth, setIsAuth] = useState(false);
+    const [user, setUser] = useState("")
 
     useEffect(() => {
         if (localStorage.getItem('token') !== null) {
             setIsAuth(true);
         }
     }, []);
+    
+    useEffect(() => {
+        const loadData = () => {
+            fetch('/api/users/current-user/', { mode: 'no-cors' })
+                .then(response => response.json())
+                .then(data => setUser(data))
+        }
+        loadData()
+        console.log(user.username)
+    }, [])
 
     return (
         <div>
@@ -30,12 +41,6 @@ const Navbar = () => {
                             </li>
 
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/">
-                                    About
-                                </NavLink>
-                            </li>
-
-                            <li className="nav-item">
                                 <NavLink className="nav-link" to="/games">
                                     Games
                                 </NavLink>
@@ -43,6 +48,12 @@ const Navbar = () => {
 
                             {isAuth === true ? (
                                 <Fragment>
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link" to="/my-orders">
+                                            Meus pedidos
+                                        </NavLink>
+                                    </li>
+
                                     <li className="nav-item">
                                         <NavLink className="nav-link" to="/logout">
                                             Logout
@@ -72,8 +83,12 @@ const Navbar = () => {
                             </li>
                         </ul>
                         <span className="navbar-text">
-                            Olá, Nome_da_pessoa
+                            Olá {user.email}
+                            <i class="bi bi-cart-fill ms-5 me-3">
+                                Carrinho
+                            </i>
                         </span>
+
                     </div>
                 </div>
             </nav>

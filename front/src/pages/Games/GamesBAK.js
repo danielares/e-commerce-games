@@ -5,64 +5,15 @@ const Games = () => {
 
     const [games, setGames] = useState([])
     const [filter, setFilter] = useState("score")
-    const [user, setUser] = useState("")
 
     useEffect(() => {
         const loadData = () => {
-            fetch('/api/games/' + filter + '/', { mode: 'no-cors' })
+            fetch('/api/games/'+filter+'/', { mode: 'no-cors' })
                 .then(response => response.json())
                 .then(data => setGames(data))
         }
         loadData()
     }, [filter])
-
-
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    const csrftoken = getCookie('csrftoken');
-
-    useEffect(() => {
-        const loadData = () => {
-            fetch('/api/users/current-user/', { mode: 'no-cors' })
-                .then(response => response.json())
-                .then(data => setUser(data))
-        }
-        loadData()
-        console.log(user.username)
-    }, [])
-
-    const addCart = (id, price) => {
-        const item = {
-            user: user.id,
-            item: id,
-            quantity: 1,
-            price: price
-        };
-
-        fetch('/api/order/my-cart/', {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': csrftoken,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(item)
-        })
-        console.log(item)
-    };
-
 
     return (
         <div className="container min-vh-100">
@@ -86,7 +37,7 @@ const Games = () => {
                                         <img className='img-fluid' src={game.image} alt="Capa do jogo" />
                                         <p className='h4 mt-2 fw-bold'>{game.name}</p>
                                         <p className='h5 fw-bold'>R${game.price}</p>
-                                        <button className='btn btn-outline-primary' onClick={() => addCart(game.id, game.price)}>
+                                        <button className='btn btn-outline-primary'>
                                             <i class="bi bi-cart-fill"></i>
                                             Adicionar ao carrinho
                                         </button>

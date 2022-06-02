@@ -15,10 +15,18 @@ class GamesAPIView(APIView):
     api/games/price/
     api/games/alphabetic/
     """
+    serializer_class = GameSerializer
     
     def get(self, request):
-        games = Game.objects.all()
-        serializer = GameSerializer(games, many=True)
+        try:
+            id = request.query_params["id"]
+            if id != None:
+                car = Game.objects.get(id=id)
+                serializer = GameSerializer(car)
+        except:
+            games = Game.objects.all()
+            serializer = GameSerializer(games, many=True)
+            
         return Response(serializer.data)
     
     def post(self, request):
@@ -27,7 +35,7 @@ class GamesAPIView(APIView):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
-
+    
 class GamesAPIPriceView(APIView):
     """
     API de jogos do e-commerce
