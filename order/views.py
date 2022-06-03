@@ -2,30 +2,54 @@ from telnetlib import STATUS
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .models import OrderItem, Cart
-from .serializers import OrderItemSerializer, CartSerializer
+from .models import Order
+from .serializers import OrderSerializer
+from games.models import Game
 
 
 class OrdersView(APIView):
     def get(self, request):
         user_id = self.request.user.id
-        print(user_id)
-        order = OrderItem.objects.filter(user=user_id)
-        serializer = OrderItemSerializer(order, many=True)
-        return Response(serializer.data)
-    
-
-class CartView(APIView):
-    def get(self, request):
-        user_id = self.request.user.id
-        print(user_id)
-        order = Cart.objects.filter(user=user_id)
-        serializer = CartSerializer(order, many=True)
+        order = Order.objects.filter(user=user_id, status_order='done')
+        serializer = OrderSerializer(order, many=True)
         return Response(serializer.data)
     
     def post(self, request):
-        serializer = CartSerializer(data=request.data)
+        data = request.data
+        serializer = OrderSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+
+    
+class CartView(APIView):
+    def get(self, request):
+        user_id = self.request.user.id
+        order = Order.objects.filter(user=user_id, status_order='cart')
+        serializer = OrderSerializer(order, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        serializer = OrderSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+        
+
+class CartDetailView(APIView):
+    
+    def get(self, request, id):
+        user_id = self.request.user.id
+        order = Order.objects.filter(user=user_id, status_order='cart', id=id)
+        serializer = OrderSerializer(order, many=True)
+        return Response(serializer.data)
+    
+    def delete(self, request, id):
+        user_id = self.request.user.id
+        order = Order.objects.filter(user=user_id, status_order='cart', id=id)
+        order.delete()
+        return Response({'message': 'Jogo removido do carrinho'})
+
+        
+
     

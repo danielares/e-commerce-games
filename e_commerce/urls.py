@@ -19,6 +19,7 @@ urlpatterns = [
     path('logout/', TemplateView.as_view(template_name='index.html')),
     path('signup/', TemplateView.as_view(template_name='index.html')),
     path('my-orders/', TemplateView.as_view(template_name='index.html')),
+    path('cart/', TemplateView.as_view(template_name='index.html')),
 ]
 
 if settings.DEBUG:

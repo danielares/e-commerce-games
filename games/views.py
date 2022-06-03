@@ -21,8 +21,8 @@ class GamesAPIView(APIView):
         try:
             id = request.query_params["id"]
             if id != None:
-                car = Game.objects.get(id=id)
-                serializer = GameSerializer(car)
+                game = Game.objects.get(id=id)
+                serializer = GameSerializer(game)
         except:
             games = Game.objects.all()
             serializer = GameSerializer(games, many=True)

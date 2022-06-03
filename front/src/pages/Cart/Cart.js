@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import styles from './Cart.module.css'
 import { getCookie } from '../../utils/getCsrftToken';
 
@@ -26,7 +26,11 @@ const Cart = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(item)
-        })
+        }).then(
+            fetch('/api/order/cart/')
+                .then(response => response.json())
+                .then(data => setCart(data))
+        )
     };
 
     return (
