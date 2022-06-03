@@ -9,7 +9,7 @@ const Home = () => {
     <div className="container min-vh-100">
       <div className="row">
         <div className="col text-center">
-          <h1>Home</h1>
+          <h1 className='fw-bold'>Home</h1>
         </div>
       </div>
     </div>

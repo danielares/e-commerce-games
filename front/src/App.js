@@ -14,6 +14,7 @@ import Login from "./pages/Auth/Login";
 import Logout from "./pages/Auth/Logout";
 import Signup from "./pages/Auth/Signup";
 import Orders from "./pages/Orders/Orders";
+import Cart from "./pages/Cart/Cart";
 
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
           <Route path='/signup' element={<Signup />}></Route>
           <Route path='/logout' element={<Logout />}></Route>
           <Route path='/my-orders' element={<Orders />}></Route>
+          <Route path='/cart' element={<Cart />}></Route>
           
         </Routes>
         <Footer />

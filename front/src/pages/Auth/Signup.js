@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getCookie } from '../../utils/getCsrftToken';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -6,23 +7,6 @@ const Signup = () => {
   const [password2, setPassword2] = useState('');
   const [errors, setErrors] = useState(false);
   const [loading, setLoading] = useState(true);
-
-
-  function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-      const cookies = document.cookie.split(';');
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        // Does this cookie string begin with the name we want?
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
-    }
-    return cookieValue;
-  }
   const csrftoken = getCookie('csrftoken');
 
 
@@ -69,7 +53,7 @@ const Signup = () => {
 
   return (
     <div className='container min-vh-100'>
-      {loading === false && <h1 className='fw-bold'>Informe seus dados para cadastrar</h1>}
+      {loading === false && <h1 className='text-center fw-bold'>Informe seus dados para cadastrar</h1>}
       {errors === true &&
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
           Não foi possivel cadastrar com os dados fornecidos.

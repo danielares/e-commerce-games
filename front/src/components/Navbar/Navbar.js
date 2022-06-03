@@ -4,13 +4,14 @@ import { NavLink } from "react-router-dom"
 const Navbar = () => {
     const [isAuth, setIsAuth] = useState(false);
     const [user, setUser] = useState("")
+    const [orders, setOrders] = useState([])
 
     useEffect(() => {
         if (localStorage.getItem('token') !== null) {
             setIsAuth(true);
         }
     }, []);
-    
+
     useEffect(() => {
         const loadData = () => {
             fetch('/api/users/current-user/', { mode: 'no-cors' })
@@ -19,6 +20,16 @@ const Navbar = () => {
         }
         loadData()
         console.log(user.username)
+    }, [])
+
+
+    useEffect(() => {
+        const loadData = () => {
+            fetch('/api/order/cart/', { mode: 'no-cors' })
+                .then(response => response.json())
+                .then(data => setOrders(data))
+        }
+        loadData()
     }, [])
 
     return (
@@ -55,6 +66,12 @@ const Navbar = () => {
                                     </li>
 
                                     <li className="nav-item">
+                                        <NavLink className="nav-link" to="/cart">
+                                            Meu carrinho
+                                        </NavLink>
+                                    </li>
+
+                                    <li className="nav-item">
                                         <NavLink className="nav-link" to="/logout">
                                             Logout
                                         </NavLink>
@@ -84,8 +101,9 @@ const Navbar = () => {
                         </ul>
                         <span className="navbar-text">
                             Olá {user.email}
+
                             <i class="bi bi-cart-fill ms-5 me-3">
-                                Carrinho
+                                {orders.length}
                             </i>
                         </span>
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { getCookie } from '../../utils/getCsrftToken';
 import styles from './Games.module.css'
 
 const Games = () => {
@@ -6,53 +7,35 @@ const Games = () => {
     const [games, setGames] = useState([])
     const [filter, setFilter] = useState("score")
     const [user, setUser] = useState("")
+    const csrftoken = getCookie('csrftoken');
 
     useEffect(() => {
         const loadData = () => {
-            fetch('/api/games/' + filter + '/', { mode: 'no-cors' })
+            fetch('/api/games/' + filter + '/')
                 .then(response => response.json())
                 .then(data => setGames(data))
         }
         loadData()
     }, [filter])
-
-
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    const csrftoken = getCookie('csrftoken');
-
+    
     useEffect(() => {
         const loadData = () => {
-            fetch('/api/users/current-user/', { mode: 'no-cors' })
+            fetch('/api/users/current-user/')
                 .then(response => response.json())
                 .then(data => setUser(data))
         }
         loadData()
-        console.log(user.username)
     }, [])
 
     const addCart = (id, price) => {
         const item = {
             user: user.id,
-            item: id,
-            quantity: 1,
-            price: price
+            shipping: 10,
+            price: price, 
+            item: [id],
         };
 
-        fetch('/api/order/my-cart/', {
+        fetch('/api/order/cart/', {
             method: 'POST',
             headers: {
                 'X-CSRFToken': csrftoken,
