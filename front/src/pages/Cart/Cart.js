@@ -5,6 +5,7 @@ import { getCookie } from '../../utils/getCsrftToken';
 const Cart = () => {
     const csrftoken = getCookie('csrftoken');
     const [cart, setCart] = useState([])
+    const [price, setPrice] = useState(null)
     const [update, setUpdate] = useState(null)
 
     useEffect(() => {
@@ -14,6 +15,16 @@ const Cart = () => {
             setCart(json)
         }
         loadData()
+    }, [update])
+
+    useEffect(() => {
+        const loadData = async () => {
+            const res = await fetch('/api/order/price-order/')
+            const json = await res.json()
+            setPrice(json)
+        }
+        loadData()
+        console.log(price)
     }, [update])
 
     const RemoveCart = async (id) => {
@@ -51,14 +62,21 @@ const Cart = () => {
                     {cart.map(item => (
                         <div className="col-12 mt-2">
                             <div className={styles.cart} key={item.id}>
-                                <div className='text-center'>
-                                    <p className='h4 mt-2 fw-bold'>Jogo: {item.item}</p>
-                                    <p className='h5 fw-bold'>frete: {item.shipping}</p>
-                                    <p className='h5 fw-bold'>Preço: {item.final_price}</p>
-                                    <button className='btn btn-outline-danger' onClick={() => RemoveCart(item.id)}>
-                                        <i class="bi bi-cart-dash-fill"></i>
-                                        Remover do carrinho
-                                    </button>
+                                <div className="row">
+                                    <div className="col-9">
+                                        <div className='text-center'>
+                                            <p className='h4 mt-2 fw-bold'>{item.item[0].name}</p>
+                                            <p className='h5 fw-bold'>frete: {item.shipping}</p>
+                                            <p className='h5 fw-bold'>Preço: {item.final_price}</p>
+                                            <button className='btn btn-outline-danger' onClick={() => RemoveCart(item.id)}>
+                                                <i class="bi bi-cart-dash-fill"></i>
+                                                Remover do carrinho
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="col-3 text-center">
+                                        <img src={item.item[0].image} alt="Capa do jogo" className="img-fluid" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -66,9 +84,9 @@ const Cart = () => {
                     {cart.length > 0 ? (
                         <div className="col-12 mt-2">
                             <div className={styles.cart}>
-                                <p className='h5 mt-2 fw-bold'>Preço dos jogos: R$ 590,00</p>
-                                <p className='h5 mt-2 fw-bold'>Frete: R$ 0,00</p>
-                                <p className='h5 mt-2 fw-bold'>Preço total: R$ 590,00</p>
+                                <p className='h5 mt-2 fw-bold'>Preço dos jogos: R$ {price[0].price}</p>
+                                <p className='h5 mt-2 fw-bold'>Frete: R$ {price[0].shipping}</p>
+                                <p className='h5 mt-2 fw-bold'>Preço total: R$ {price[0].final_price}</p>
                                 <button className='btn btn-outline-primary' onClick={() => checkout()} >
                                     Finalizar pedido
                                 </button>

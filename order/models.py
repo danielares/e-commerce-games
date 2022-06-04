@@ -23,4 +23,3 @@ class Order(Base):
 
         self.final_price = self.price + self.shipping
         super().save(*args, **kwargs)
-    

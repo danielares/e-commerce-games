@@ -32,12 +32,17 @@ const Games = () => {
         loadData()
     }, [update])
 
-    const addCart = async (id, price) => {
+    const addCart = async (game) => {
         const item = {
             user: user.id,
             shipping: 10,
-            price: price,
-            item: [id],
+            price: game.price,
+            item: [{
+                id: game.id,
+                name: game.name,
+                price: game.price,
+                score: game.score,
+            }],
         };
         await fetch('/api/order/cart/', {
             method: 'POST',
@@ -75,7 +80,7 @@ const Games = () => {
                                     <img className='img-fluid' src={game.image} alt="Capa do jogo" />
                                     <p className='h4 mt-2 fw-bold'>{game.name}</p>
                                     <p className='h5 fw-bold'>R${game.price}</p>
-                                    <button className='btn btn-outline-primary' onClick={() => addCart(game.id, game.price)}>
+                                    <button className='btn btn-outline-primary' onClick={() => addCart(game)}>
                                         <i class="bi bi-cart-fill"></i>
                                         Adicionar ao carrinho
                                     </button>

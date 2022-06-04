@@ -1,0 +1,43 @@
+.orders {
+    transition: background-color 0.5s ease;
+    background-color: #212529;
+    border-radius: 5px;
+    padding: 15px;
+    overflow: hidden;
+    padding-top: 15px;
+    color: white;
+    height: 180px;
+}
+
+.orders:hover {
+    transition: background-color 0.5s ease;
+    background-color: rgb(24, 25, 25);
+}
+
+/* IMAGENS */
+.orders img {
+    width: 150px;
+    -moz-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.orders:hover img {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+/* Icons */
+.orders button {
+    width: 100%;
+    color: #FFF;
+}
+
+.orders i {
+    padding-right: 5px;
+}
+
+.btn {
+    width: 100%;
+  }

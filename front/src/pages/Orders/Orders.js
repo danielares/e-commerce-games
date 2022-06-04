@@ -1,10 +1,10 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import styles from './Orders.module.css'
 
 
 const Orders = () => {
     const [orders, setOrders] = useState([])
-    
+
 
     useEffect(() => {
         const loadData = () => {
@@ -17,21 +17,29 @@ const Orders = () => {
 
     return (
         <div className="container min-vh-100">
-            <h1 className='text-center fw-bold'>Meus pedidos</h1>
             <div className="row">
-                {orders.map(order => (
-                    <div className="col-12 mt-2">
-                        <div className={styles.orders} key={order.id}>
-                            <div className='text-center'>
-                                <p className='h4 mt-2 fw-bold'>Item: {order.item}</p>
-                                <p className='h5 fw-bold'>Preço: {order.final_price}</p>
+                <h1 className='text-center fw-bold'>Meus pedidos</h1>
+                <div className="row">
+                    {orders.map(item => (
+                        <div className="col-12 mt-2">
+                            <div className={styles.orders} key={item.id}>
+                                <div className="row">
+                                    <div className="col-9">
+                                        <div className='text-center'>
+                                            <p className='h4 mt-2 fw-bold'>{item.item[0].name}</p>
+                                            <p className='h5 fw-bold'>Preço: {item.final_price}</p>
+                                        </div>
+                                    </div>
+                                    <div className="col-3 text-center">
+                                        <img src={item.item[0].image} alt="Capa do jogo" className="img-fluid" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     )
 }
-
 export default Orders

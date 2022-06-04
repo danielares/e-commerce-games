@@ -1,10 +1,11 @@
 from rest_framework import serializers
+from drf_writable_nested import WritableNestedModelSerializer
 
 from .models import Order
+from games.serializers import GameSerializer
 
-
-class OrderSerializer(serializers.ModelSerializer):
-    
+class OrderSerializer(WritableNestedModelSerializer, serializers.ModelSerializer):
+    item = GameSerializer(many=True)
     class Meta:
         model = Order
         fields = (
@@ -19,3 +20,9 @@ class OrderSerializer(serializers.ModelSerializer):
             'status_order',
             'item'
         )
+
+
+class PriceOrderSerializer(serializers.Serializer):
+   price = serializers.DecimalField(max_digits=10, decimal_places=2)
+   shipping = serializers.DecimalField(max_digits=10, decimal_places=2)
+   final_price = serializers.DecimalField(max_digits=10, decimal_places=2)
