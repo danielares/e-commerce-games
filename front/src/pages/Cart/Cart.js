@@ -5,7 +5,7 @@ import { getCookie } from '../../utils/getCsrftToken';
 const Cart = () => {
     const csrftoken = getCookie('csrftoken');
     const [cart, setCart] = useState([])
-    const [price, setPrice] = useState(null)
+    const [price, setPrice] = useState("")
     const [update, setUpdate] = useState(null)
 
     useEffect(() => {
@@ -24,7 +24,6 @@ const Cart = () => {
             setPrice(json)
         }
         loadData()
-        console.log(price)
     }, [update])
 
     const RemoveCart = async (id) => {
@@ -68,7 +67,7 @@ const Cart = () => {
                                             <p className='h4 mt-2 fw-bold'>{item.item[0].name}</p>
                                             <p className='h5 fw-bold'>frete: {item.shipping}</p>
                                             <p className='h5 fw-bold'>Preço: {item.final_price}</p>
-                                            <button className='btn btn-outline-danger' onClick={() => RemoveCart(item.id)}>
+                                            <button className='btn btn-outline-danger mt-2' onClick={() => RemoveCart(item.id)}>
                                                 <i class="bi bi-cart-dash-fill"></i>
                                                 Remover do carrinho
                                             </button>
@@ -84,10 +83,10 @@ const Cart = () => {
                     {cart.length > 0 ? (
                         <div className="col-12 mt-2">
                             <div className={styles.cart}>
-                                <p className='h5 mt-2 fw-bold'>Preço dos jogos: R$ {price[0].price}</p>
-                                <p className='h5 mt-2 fw-bold'>Frete: R$ {price[0].shipping}</p>
-                                <p className='h5 mt-2 fw-bold'>Preço total: R$ {price[0].final_price}</p>
-                                <button className='btn btn-outline-primary' onClick={() => checkout()} >
+                                <p className='h5 mt-2 fw-bold'>Preço dos jogos: R$ {price.price}</p>
+                                <p className='h5 mt-2 fw-bold'>Frete: R$ {price.shipping}</p>
+                                <p className='h5 mt-2 fw-bold'>Preço total: R$ {price.final_price}</p>
+                                <button className='btn btn-outline-primary mt-2' onClick={() => checkout()} >
                                     Finalizar pedido
                                 </button>
                             </div>

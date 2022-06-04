@@ -83,7 +83,7 @@ class PriceOrderView(APIView):
             shipping = 0
             
         final_price = price + shipping
-        data= [{"price": price, "shipping": shipping, "final_price": final_price}]
+        data= {"price": price, "shipping": shipping, "final_price": final_price}
         
-        results = PriceOrderSerializer(data, many=True).data
+        results = PriceOrderSerializer(data).data
         return Response(results)
