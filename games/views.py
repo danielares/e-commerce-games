@@ -36,16 +36,7 @@ class GamesAPIView(APIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
     
-class GamesAPIPriceView(APIView):
-    """
-    API de jogos do e-commerce
-    Todos os Jogos
-    As rotas são:
-    api/games/
-    api/games/score/
-    api/games/price/
-    api/games/alphabetic/
-    """
+class GamesAPIPriceCresView(APIView):
     
     def get(self, request):
         games = Game.objects.filter().order_by('price')
@@ -53,16 +44,15 @@ class GamesAPIPriceView(APIView):
         return Response(serializer.data)
     
 
+class GamesAPIPriceDesView(APIView):
+    
+    def get(self, request):
+        games = Game.objects.filter().order_by('-price')
+        serializer = GameSerializer(games, many=True)
+        return Response(serializer.data)
+    
+
 class GamesAPIScoreView(APIView):
-    """
-    API de jogos do e-commerce
-    Todos os Jogos
-    As rotas são:
-    api/games/
-    api/games/score/
-    api/games/price/
-    api/games/alphabetic/
-    """
     
     def get(self, request):
         games = Game.objects.filter().order_by('-score')
@@ -71,15 +61,6 @@ class GamesAPIScoreView(APIView):
 
 
 class GamesAPIAlphabeticView(APIView):
-    """
-    API de jogos do e-commerce
-    Todos os Jogos
-    As rotas são:
-    api/games/
-    api/games/score/
-    api/games/price/
-    api/games/alphabetic/
-    """
     
     def get(self, request):
         games = Game.objects.filter().order_by('name')

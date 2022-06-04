@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     # 3rd Party Apps
     'rest_framework',
     'rest_framework.authtoken',
-    'dj_rest_auth', # new
-    'django.contrib.sites',
-    'allauth',
+    'dj_rest_auth',
+    #'django.contrib.sites',
+    #'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',

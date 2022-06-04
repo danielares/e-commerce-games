@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"
 const Navbar = () => {
     const [isAuth, setIsAuth] = useState(false);
     const [user, setUser] = useState("")
-    const [orders, setOrders] = useState([])
+    const [cart, setCart] = useState([])
 
     useEffect(() => {
         if (localStorage.getItem('token') !== null) {
@@ -20,16 +20,6 @@ const Navbar = () => {
         }
         loadData()
         console.log(user.username)
-    }, [])
-
-
-    useEffect(() => {
-        const loadData = () => {
-            fetch('/api/order/cart/', { mode: 'no-cors' })
-                .then(response => response.json())
-                .then(data => setOrders(data))
-        }
-        loadData()
     }, [])
 
     return (
@@ -101,10 +91,10 @@ const Navbar = () => {
                         </ul>
                         <span className="navbar-text">
                             Olá {user.email}
-
-                            <i class="bi bi-cart-fill ms-5 me-3">
-                                {orders.length}
-                            </i>
+                            <a className='ms-5 me-3' href="/cart">
+                                <i class="bi bi-cart-fill">
+                                </i>
+                            </a>
                         </span>
 
                     </div>

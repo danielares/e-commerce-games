@@ -15,7 +15,6 @@ class Order(Base):
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
     final_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
     status_order = models.CharField(max_length=50, choices=CHOICES, default='cart')
-    
     item = models.ManyToManyField(Game)
     
     def save(self, *args, **kwargs):
@@ -24,12 +23,4 @@ class Order(Base):
 
         self.final_price = self.price + self.shipping
         super().save(*args, **kwargs)
-        
-        
-class OrderItem(models.Model):
-    item = models.ForeignKey(Game, on_delete=models.CASCADE)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(null=False, blank=False, default=1)
     
-    def __str__(self):
-        return f"{self.item}, {self.order}"

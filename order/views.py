@@ -50,6 +50,23 @@ class CartDetailView(APIView):
         order.delete()
         return Response({'message': 'Jogo removido do carrinho'})
 
+
+class CheckoutView(APIView):
+    def get(self, request):
+        user_id = self.request.user.id
+        order = Order.objects.filter(user=user_id, status_order='cart')
+        serializer = OrderSerializer(order, many=True)
+        return Response(serializer.data)
+    
+    def patch(self, request):
+        user_id = self.request.user.id
+        orders = Order.objects.filter(user=user_id, status_order='cart')
+        print(orders)
+        for order in orders:
+            order.status_order = 'done'
+            order.save()
+        return Response({'message': 'Jogo removido do carrinho'})
+
         
 
     
