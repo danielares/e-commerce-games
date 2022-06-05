@@ -5,6 +5,17 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+a {
+  color: #FFF;
+  transition: .3s;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #CCC;
+  transition: .3s;
+}
+
 body {
   margin: 0;
   padding: 0;

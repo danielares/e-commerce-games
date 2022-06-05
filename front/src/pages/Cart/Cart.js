@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './Cart.module.css'
 import { getCookie } from '../../utils/getCsrftToken';
 

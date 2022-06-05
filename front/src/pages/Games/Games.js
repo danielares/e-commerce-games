@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { getCookie } from '../../utils/getCsrftToken';
 import styles from './Games.module.css'
 

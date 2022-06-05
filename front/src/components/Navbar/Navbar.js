@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom"
 const Navbar = () => {
     const [isAuth, setIsAuth] = useState(false);
     const [user, setUser] = useState("")
-    const [cart, setCart] = useState([])
 
     useEffect(() => {
         if (localStorage.getItem('token') !== null) {
@@ -19,8 +18,7 @@ const Navbar = () => {
                 .then(data => setUser(data))
         }
         loadData()
-        console.log(user.username)
-    }, [])
+    }, [user.username])
 
     return (
         <div>
