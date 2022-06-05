@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',
-    #'django.contrib.sites',
-    #'allauth',
+    'django.contrib.sites',
+    'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
@@ -94,8 +94,11 @@ WSGI_APPLICATION = 'e_commerce.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ecommerce-db',
+        'USER': 'postgres',
+        'PASSWORD': 'adminadmin',
+        'HOST': 'localhost'
     }
 }
 

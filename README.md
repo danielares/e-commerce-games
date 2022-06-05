@@ -2,7 +2,7 @@
 
 <p align='center'>Este projeto consiste em um pseudo e-commerce de jogos utilizando Django REST framework no back-end e React no front-end.</p>
 
-<p><a href='#'>Clique aqui para ver a aplicação funcionando</a></p>
+<p><a href='https://ecommerce-jogos-wick.herokuapp.com/'>Clique aqui para ver a aplicação funcionando</a></p>
 
 <hr>
 
